@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Historical Fort Atkinson</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <!-- calls arcgis api CSS and JS library -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.28/"></script>
+
+
+ 
+  <script>  
+    require([
+      "esri/config", 
+      "esri/Map", 
+      "esri/views/MapView",
+      "esri/widgets/Locate",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/BasemapGallery/support/PortalBasemapsSource",
+      "esri/widgets/Search",
+      "esri/Graphic",  
+      "esri/layers/GraphicsLayer",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/Editor",
+      "esri/widgets/Legend",
+      "esri/layers/TileLayer",
+      "esri/widgets/LayerList",
+      "esri/renderers/SimpleRenderer"
+      
+    ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer) {   
+
+      esriConfig.apiKey = "AAPKc722771c0ccc42f6b3a50f98f0541437noDYBlU0Z8XIJioQe0FCEDxsHh9fAgIj7WZTgQnwd8Iro4vn-CgJSPt4wG7YeNvj"
+      const map = new Map({ 
+        basemap: "arcgis-streets"
+      });
+      
+      const view = new MapView({
+          map: map,
+          center: [-88.837, 42.9299], // longitude, latitude
+          zoom: 14,
+          container: "viewDiv"
+      });
+      
+      let layerList = new LayerList({
+      view: view
+      });
+      view.ui.add(layerList, {
+        position: "bottom-right"
+      });
+
+
+      
+      let fort1904 = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1904_Sanborn/MapServer"
+      });
+      map.add(fort1904);
+      
+      let fort1924 = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_1924_Sanborn_main/MapServer"
+      });
+      map.add(fort1924);
+
+      let poiRenderer = {
+        type: "simple",  // autocasts as new SimpleRenderer()
+        symbol: {
+        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+        style: "diamond",
+        size: 10,
+        color: "blue",
+        outline: {  // autocasts as new SimpleLineSymbol()
+          width: 0.5,
+          color: "white"
+        }
+        }
+        };
+
+      const servicePopup = {
+        "title": "Site",
+        "content": "<b>Name:</b> {Name}<br><b>About:</b> {About}<br><b>Link:</b> <a href='{Link}'>{Link}</a><br>"
+      }
+      const pointsofinterest = new FeatureLayer({
+        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/POI_Mock_Up/FeatureServer",
+        outFields: ["Name", "About","Link"],
+        popupTemplate: servicePopup,
+        renderer: poiRenderer
+      });
+      map.add(pointsofinterest);
+
+
+
+     // const graphicsLayer = new GraphicsLayer();  
+      //map.add(graphicsLayer);
+
+
+
+      const locateBtn = new Locate({view: view});
+      view.ui.add(locateBtn, {position: "top-left"});
+
+
+      const basemapGallery = new BasemapGallery({
+        view: view,
+        source: {
+          portal: "https://arcgis.com",
+          filterFunction: async (item, index, basemaps) => {
+            let bool = false;
+            await item.load().then((loadedBasemap) => {
+              if(loadedBasemap.title == "Topographic"){
+                bool = true;
+              }
+              if(loadedBasemap.title == "Imagery"){
+                bool = true;
+              }
+              if(loadedBasemap.title == "Streets"){
+                bool = true;
+              }
+            })
+            return bool;
+          }}
+        });
+      view.ui.add(basemapGallery, {position: "top-right" });
+
+      //const legend = new Legend({
+      //  view: view
+      //});
+      //view.ui.add(legend, "bottom-right");
+    
+     
+
+
+    });  
+
+    
+  </script>
+
+  <!-- css opening full screen map -->
+  <style>  
+    html,  
+    body,  
+    #viewDiv {  
+      padding: 0;  margin: 0;  height: 100%;  width: 100%;  
+    }  
+  </style> 
+
+
+</head>
+<body>
+  <!-- displays map -->
+  <div id="viewDiv"></div> 
+</body>
+</html>
+
