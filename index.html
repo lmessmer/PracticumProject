@@ -27,9 +27,10 @@
       "esri/widgets/Legend",
       "esri/layers/TileLayer",
       "esri/widgets/LayerList",
-      "esri/renderers/SimpleRenderer"
+      "esri/renderers/SimpleRenderer",
+      "esri/widgets/Expand"
       
-    ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer) {   
+    ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer, Expand) {   
 
       esriConfig.apiKey = "AAPKc722771c0ccc42f6b3a50f98f0541437noDYBlU0Z8XIJioQe0FCEDxsHh9fAgIj7WZTgQnwd8Iro4vn-CgJSPt4wG7YeNvj"
       const map = new Map({ 
@@ -46,10 +47,12 @@
       let layerList = new LayerList({
       view: view
       });
-      view.ui.add(layerList, {
-        position: "bottom-right"
+      const layerListExpand = new Expand({
+        expandIcon: "layers",
+        view: view,
+        content: layerList
       });
-
+      view.ui.add(layerListExpand, "bottom-right")
 
       
       let fort1904 = new TileLayer({
@@ -119,7 +122,13 @@
             return bool;
           }}
         });
-      view.ui.add(basemapGallery, {position: "top-right" });
+
+      const basemapExpand = new Expand({
+        expandIcon: "basemap",
+        view: view,
+        content: basemapGallery
+      });
+      view.ui.add(basemapExpand, "top-right")
 
       //const legend = new Legend({
       //  view: view
@@ -150,4 +159,5 @@
   <div id="viewDiv"></div> 
 </body>
 </html>
+
 
