@@ -1,0 +1,39 @@
+html,  
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}  
+#viewDiv {  
+  padding: 0;  
+  margin: 0;  
+  height: 89vh;  
+  width: 100%;  
+}
+#title{padding: 0; 
+  margin: 0; 
+  height: 7vh; 
+  width: 100%; 
+  line-height: 7vh;
+  text-align: center;
+  font-size: 5vmin;
+  font-weight: bold;
+  background-color: #a70101;
+}  
+
+.button {
+background-color: #2d2e2e;
+border: none;
+color: white;
+padding: 1vh 1vh;
+text-align: center;
+font-weight: bold;
+text-decoration: none;
+display: inline-block;
+font-size: 2vh;
+}
+.navbar {
+background-color: #a70101;
+overflow: hidden;
+width: 100%;
+}
