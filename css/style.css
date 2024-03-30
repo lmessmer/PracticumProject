@@ -21,6 +21,23 @@ body{
   background-color: #a70101;
 }  
 
+#textright{
+padding:0;
+width: 50vw;
+margin-right: 0;
+float: right;
+}
+
+
+#mapleft {  
+  padding: 0;  
+  margin: 0;  
+  height: 89vh;  
+  width: 50vw;
+  float: left;
+}
+
+
 .button {
 background-color: #2d2e2e;
 border: none;
