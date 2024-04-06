@@ -116,8 +116,8 @@
       };
 
       const servicePopup = {
-        "title": "Site",
-        "content": "<b>Name:</b> {Name}<br><b>About:</b> {About}<br><b>Link:</b> <a href='{Link}'>{Link}</a><br>"
+        "title": "{Name}",
+        "content": "{About}<br>{Link}"
       }
       const pointsofinterest = new FeatureLayer({
         url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/POI_Mock_Up/FeatureServer",
@@ -132,13 +132,13 @@
 
       const nrhpPopup = {
         "title": "{name}",
-        "content": "<b>Type of Place:</b> {type}<br><b>Date Added:</b> {add_date}<br><b>More Information:</b> <a href='{link}'>{link}</a><br>"
+        "content": "<b>Type of Place:</b> {type}<br><b>Date Added:</b> {date_added}<br><b>More Information:</b> <a href='{link}'>{link}</a><br>"
       }
 
       //creates feature layer for sites on the national register of historic places
       const nrhpLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/Historic_Buildings/FeatureServer",
-        outFields: ["name","type", "add_date","link"],
+        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/fort_atkinson_nrhp_points/FeatureServer",
+        outFields: ["name","type", "date_added","link"],
         popupTemplate: nrhpPopup,
         renderer: rhppointRenderer
       });
@@ -181,10 +181,16 @@
       });
       view.ui.add(basemapExpand, "top-right")
 
-      //const legend = new Legend({
-      //  view: view
-      //});
-      //view.ui.add(legend, "bottom-right");
+      const legend = new Legend({
+        view: view
+      });
+      
+      const legendExpand = new Expand({
+        expandIcon: "legend",
+        view: view,
+        content: legend
+      });
+      view.ui.add(legendExpand, "bottom-left");
     
      
 
