@@ -101,6 +101,20 @@
         }
         };
 
+      let rhppointRenderer = {
+      type: "simple",  // autocasts as new SimpleRenderer()
+      symbol: {
+      type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+      style: "diamond",
+      size: 10,
+      color: "red",
+      outline: {  // autocasts as new SimpleLineSymbol()
+        width: 0.5,
+        color: "white"
+      }
+      }
+      };
+
       const servicePopup = {
         "title": "Site",
         "content": "<b>Name:</b> {Name}<br><b>About:</b> {About}<br><b>Link:</b> <a href='{Link}'>{Link}</a><br>"
@@ -112,9 +126,24 @@
         renderer: poiRenderer
       });
       map.add(pointsofinterest);
+      pointsofinterest.title = "Historic Sites";
 
 
+      
+      const nrhpPopup = {
+        "title": "{name}",
+        "content": "<b>Type of Place:</b> {type}<br><b>Date Added:</b> {add_date}<br><b>More Information:</b> <a href='{link}'>{link}</a><br>"
+      }
 
+      //creates feature layer for sites on the national register of historic places
+      const nrhpLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/Historic_Buildings/FeatureServer",
+        outFields: ["name","type", "add_date","link"],
+        popupTemplate: nrhpPopup,
+        renderer: rhppointRenderer
+      });
+      map.add(nrhpLayer);
+      nrhpLayer.title = "National Register of Historic Places";
      // const graphicsLayer = new GraphicsLayer();  
       //map.add(graphicsLayer);
 
