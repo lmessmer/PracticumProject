@@ -5,10 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
+
   <!-- calls arcgis api CSS and JS library -->
   <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- calls google fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -35,7 +37,8 @@
       "esri/renderers/SimpleRenderer",
       "esri/widgets/Expand"
       
-    ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer, Expand) {   
+    ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, 
+    GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer, Expand) {   
 
       esriConfig.apiKey = "AAPKc722771c0ccc42f6b3a50f98f0541437noDYBlU0Z8XIJioQe0FCEDxsHh9fAgIj7WZTgQnwd8Iro4vn-CgJSPt4wG7YeNvj"
       const map = new Map({ 
@@ -60,16 +63,19 @@
       view.ui.add(layerListExpand, "bottom-right")
 
       let fort1847 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/fort_1847/MapServer"
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/fort_1847/MapServer",
+        listMode: "hide-children"
       });
       map.add(fort1847);
       fort1847.title = "Fort Atkinson 1847";
       
       let fort1904 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1904_Sanborn/MapServer"
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1904_Sanborn/MapServer",
+        listMode: "hide-children"
       });
       map.add(fort1904);
       fort1904.title = "Fort Atkinson 1904";
+     
       
       //let fort1924 = new TileLayer({
       //  url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_1924_Sanborn_main/MapServer"
@@ -77,7 +83,8 @@
       //map.add(fort1924);
 
       let test24 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Sanborn_1924/MapServer"
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Sanborn_1924/MapServer",
+        listMode: "hide-children"
       });
       map.add(test24);
       test24.title = "Fort Atkinson 1924";

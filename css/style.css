@@ -23,7 +23,7 @@ body{
 
 #textright{
 padding:0;
-width: 50vw;
+width: 45vmax;
 margin-right: 0;
 float: right;
 }
@@ -32,8 +32,8 @@ float: right;
 #mapleft {  
   padding: 0;  
   margin: 0;  
-  height: 89vh;  
-  width: 50vw;
+  height: 45vmax;  
+  width: 45vmax;
   float: left;
 }
 
