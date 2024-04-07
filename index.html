@@ -118,6 +118,7 @@
       const servicePopup = {
         "title": "{Name}",
         "content": "{About}<br>{Link}"
+        //"content": "{About}<br><b>{link_title}</b> <a href='{link}'>{link_desc}</a>
       }
       const pointsofinterest = new FeatureLayer({
         url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/POI_Mock_Up/FeatureServer",
@@ -126,7 +127,7 @@
         renderer: poiRenderer
       });
       map.add(pointsofinterest);
-      pointsofinterest.title = "Historic Sites";
+      pointsofinterest.title = "Historic Sites (Blue Diamonds)";
 
 
 
@@ -143,7 +144,7 @@
         renderer: rhppointRenderer
       });
       map.add(nrhpLayer);
-      nrhpLayer.title = "National Register of Historic Places";
+      nrhpLayer.title = "National Register of Historic Places (Red Diamonds)";
      // const graphicsLayer = new GraphicsLayer();  
       //map.add(graphicsLayer);
 
