@@ -87,6 +87,13 @@
       map.add(test24);
       test24.title = "Fort Atkinson 1924";
 
+      let aerial37 = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_1937_Aerial/MapServer",
+        listMode: "hide-children"
+      });
+      map.add(aerial37);
+      aerial37.title = "Fort Atkinson Aerial 1937";
+
       let poiRenderer = {
         type: "simple",  // autocasts as new SimpleRenderer()
         symbol: {
