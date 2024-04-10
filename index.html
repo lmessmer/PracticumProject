@@ -50,6 +50,50 @@
           zoom: 14,
           container: "viewDiv"
       });
+
+      const locateBtn = new Locate({view: view});
+      view.ui.add(locateBtn, {position: "top-left"});
+
+
+      const basemapGallery = new BasemapGallery({
+        view: view,
+        source: {
+          portal: "https://arcgis.com",
+          filterFunction: async (item, index, basemaps) => {
+            let bool = false;
+            await item.load().then((loadedBasemap) => {
+              if(loadedBasemap.title == "Topographic"){
+                bool = true;
+              }
+              if(loadedBasemap.title == "Imagery"){
+                bool = true;
+              }
+              if(loadedBasemap.title == "Streets"){
+                bool = true;
+              }
+            })
+            return bool;
+          }}
+        });
+
+      const basemapExpand = new Expand({
+        expandIcon: "basemap",
+        view: view,
+        content: basemapGallery
+      });
+      view.ui.add(basemapExpand, "top-right")
+
+      //const legend = new Legend({
+      //  view: view
+      //});
+      
+      //const legendExpand = new Expand({
+      //  expandIcon: "legend",
+      //  view: view,
+      //  content: legend
+      //});
+      //view.ui.add(legendExpand, "bottom-left");
+    
       
       let layerList = new LayerList({
       view: view
@@ -59,7 +103,7 @@
         view: view,
         content: layerList
       });
-      view.ui.add(layerListExpand, "bottom-right")
+      view.ui.add(layerListExpand, "top-right")
 
       let fort1847 = new TileLayer({
         url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/FortOriginalSurveyGray/MapServer",
@@ -75,10 +119,6 @@
       map.add(fort1904);
       fort1904.title = "Fort Atkinson 1904";
       
-      //let fort1924 = new TileLayer({
-      //  url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_1924_Sanborn_main/MapServer"
-      //});
-      //map.add(fort1924);
 
       let test24 = new TileLayer({
         url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Sanborn_1924/MapServer",
@@ -157,49 +197,7 @@
 
 
 
-      const locateBtn = new Locate({view: view});
-      view.ui.add(locateBtn, {position: "top-left"});
 
-
-      const basemapGallery = new BasemapGallery({
-        view: view,
-        source: {
-          portal: "https://arcgis.com",
-          filterFunction: async (item, index, basemaps) => {
-            let bool = false;
-            await item.load().then((loadedBasemap) => {
-              if(loadedBasemap.title == "Topographic"){
-                bool = true;
-              }
-              if(loadedBasemap.title == "Imagery"){
-                bool = true;
-              }
-              if(loadedBasemap.title == "Streets"){
-                bool = true;
-              }
-            })
-            return bool;
-          }}
-        });
-
-      const basemapExpand = new Expand({
-        expandIcon: "basemap",
-        view: view,
-        content: basemapGallery
-      });
-      view.ui.add(basemapExpand, "top-right")
-
-      const legend = new Legend({
-        view: view
-      });
-      
-      const legendExpand = new Expand({
-        expandIcon: "legend",
-        view: view,
-        content: legend
-      });
-      view.ui.add(legendExpand, "bottom-left");
-    
      
 
 
