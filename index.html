@@ -89,6 +89,7 @@
       //adds basemap expand object to top right of map
       view.ui.add(basemapExpand, "top-right")
 
+
       //const legend = new Legend({
       //  view: view
       //});
@@ -115,6 +116,16 @@
       //creates and adds layer list expand object to map in top right
       view.ui.add(layerListExpand, "top-right")
 
+      //creates and adds an "about" popup that tells the user about the map
+      const expand = new Expand({
+        expandIconClass: "esri-icon-comment",
+        expandTooltip: "Show Information",
+        collapseTooltip: "Hide Information",
+        view: view,
+        content: document.getElementById("infoDiv")
+      });
+      view.ui.add(expand, "top-right");
+
 
       //creates and adds 1847 survey layer to map, removes children from layer list
       let fort1847 = new TileLayer({
@@ -124,7 +135,7 @@
 
       //adds 1847 map to layer list, defines title in layer list
       map.add(fort1847);
-      fort1847.title = "Fort Atkinson 1847";
+      fort1847.title = "First Survey of the Town, 1847";
       
 
       //creates and adds 1904 Sanborn map layer to map, removes children from layer list
@@ -135,18 +146,18 @@
 
       //adds 1904 layer to map, defines title in layer list
       map.add(fort1904);
-      fort1904.title = "Fort Atkinson 1904";
+      fort1904.title = "1904 Insurance Map";
       
 
       //creates and adds 1924 Sanborn map layer to map, removes children from layer list
-      let test24 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Sanborn_1924/MapServer",
+      let fort24 = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1924_Sanborn/MapServer",
         listMode: "hide-children"
       });
 
       //adds 1924 map to layer list, defines title in layer list
-      map.add(test24);
-      test24.title = "Fort Atkinson 1924";
+      map.add(fort24);
+      fort24.title = "1924 Insurance Map";
 
 
       //creates and adds 1937 aerials layer to map, removes children from layer list
@@ -157,7 +168,7 @@
 
       //adds 1937 aerials layer to map, defines title in layer list
       map.add(aerial37);
-      aerial37.title = "Fort Atkinson Aerial 1937";
+      aerial37.title = "1937 Aerial Photos";
 
       //creates blue diamond render for point objects, defines color and outline
       let poiRenderer = {
@@ -256,7 +267,14 @@
   <div id="title">Historical Fort Atkinson</div>
 
   <!-- displays map -->
-  <div id="viewDiv"></div> 
+  <div id="viewDiv">
+    <div id="infoDiv">
+      <h2>About This Map</h2>
+      <p>Above this window is the list of available map layers you can turn on and off. 
+        These show Fort Atkinson as it was at various points throughout history, as well as some points of interest in the city. 
+        Flip through the map layers to see how the town has changed.</p>
+  </div>
+  </div> 
 
 </body>
 </html>

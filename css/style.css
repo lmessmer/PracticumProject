@@ -54,3 +54,8 @@ background-color: #a70101;
 overflow: hidden;
 width: 100%;
 }
+
+#infoDiv {
+  width: 300px;
+  background-color: white;
+  padding: 10px;}
