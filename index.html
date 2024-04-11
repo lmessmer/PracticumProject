@@ -138,6 +138,16 @@
       fort1847.title = "First Survey of the Town, 1847";
       
 
+      //creates and adds 1898 Sanborn map layer to map, removes children from layer list
+      let fort1898 = new TileLayer({
+        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1898_Sanborn_Map/MapServer",
+        listMode: "hide-children"
+      });
+
+      //adds 1898 layer to map, defines title in layer list
+      map.add(fort1898);
+      fort1898.title = "1898 Insurance Map";
+
       //creates and adds 1904 Sanborn map layer to map, removes children from layer list
       let fort1904 = new TileLayer({
         url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1904_Sanborn/MapServer",
