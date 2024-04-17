@@ -33,12 +33,13 @@
       "esri/widgets/Editor",
       "esri/widgets/Legend",
       "esri/layers/TileLayer",
+      "esri/layers/VectorTileLayer",
       "esri/widgets/LayerList",
       "esri/renderers/SimpleRenderer",
       "esri/widgets/Expand"
       
     ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, 
-    GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, LayerList, SimpleRenderer, Expand) {   
+    GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, VectorTileLayer, LayerList, SimpleRenderer, Expand) {   
 
       esriConfig.apiKey = "AAPKc722771c0ccc42f6b3a50f98f0541437noDYBlU0Z8XIJioQe0FCEDxsHh9fAgIj7WZTgQnwd8Iro4vn-CgJSPt4wG7YeNvj"
       const map = new Map({ 
@@ -62,58 +63,14 @@
       });
       view.ui.add(layerListExpand, "bottom-right")
 
-      let fort1847 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/fort_1847/MapServer",
+
+
+      let FortGrowth = new VectorTileLayer({
+        url: "https://vectortileservices.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Extents_Combined/VectorTileServer",
         listMode: "hide-children"
       });
-      map.add(fort1847);
-      fort1847.title = "Fort Atkinson 1847";
-      
-      let fort1904 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_1904_Sanborn/MapServer",
-        listMode: "hide-children"
-      });
-      map.add(fort1904);
-      fort1904.title = "Fort Atkinson 1904";
-     
-      
-      //let fort1924 = new TileLayer({
-      //  url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_1924_Sanborn_main/MapServer"
-      //});
-      //map.add(fort1924);
-
-      let test24 = new TileLayer({
-        url: "https://tiles.arcgis.com/tiles/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Sanborn_1924/MapServer",
-        listMode: "hide-children"
-      });
-      map.add(test24);
-      test24.title = "Fort Atkinson 1924";
-
-      let poiRenderer = {
-        type: "simple",  // autocasts as new SimpleRenderer()
-        symbol: {
-        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-        style: "diamond",
-        size: 10,
-        color: "blue",
-        outline: {  // autocasts as new SimpleLineSymbol()
-          width: 0.5,
-          color: "white"
-        }
-        }
-        };
-
-      const servicePopup = {
-        "title": "Site",
-        "content": "<b>Name:</b> {Name}<br><b>About:</b> {About}<br><b>Link:</b> <a href='{Link}'>{Link}</a><br>"
-      }
-      const pointsofinterest = new FeatureLayer({
-        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/POI_Mock_Up/FeatureServer",
-        outFields: ["Name", "About","Link"],
-        popupTemplate: servicePopup,
-        renderer: poiRenderer
-      });
-      map.add(pointsofinterest);
+      map.add(FortGrowth);
+      FortGrowth.title = "Fort Atkinson's Growth Through Time";
 
 
 
@@ -187,8 +144,8 @@
   <h2>Growth of the City</h2>
 
   <p>According to the census, the population has grown from 334 in 1850 to 12,579 in 2022.
-    Between the original survey of the town and now, the developed footprint of Fort Atkinson has grown from xxxxx square miles to xxxxx square miles.
-    The map shows the expanding footprints of the town through the years, and the borders of the town for each year can be toggled on and off in the lower right of the map. </p>
+    Between the original survey of the town and now, the developed footprint of Fort Atkinson has grown from .087 square miles to 4.368 square miles.
+    The map shows the expanding footprints of the town through the years. </p>
 
 
   <h2>This shows the growth of the town of Fort Atkinson through time.</h2> 

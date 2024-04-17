@@ -222,14 +222,14 @@
       //creates the popup style used for the points of interest layer
       const poiPopup = {
         "title": "{Name}",
-        "content": "{About}<br>{Link}"
-        //"content": "{About}<br><b>{link_title}</b> <a href='{link}'>{link_desc}</a>
+        //"content": "{About}<br>{Link}"
+        "content": "{About}<br><b>{link_title}</b> <a href='{Link}'>{link_name}</a>"
       }
 
       //creates feature layer for points of interest, feature layer hosted on arcgis online
       const pointsofinterest = new FeatureLayer({
-        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/POI_Mock_Up/FeatureServer",
-        outFields: ["Name", "About","Link"],
+        url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Atkinson_Historical_Points_of_Interest_17APR24/FeatureServer",
+        outFields: ["Name", "About","Link", "link_name", "link_title"],
         popupTemplate: poiPopup,
         renderer: poiRenderer
       });
