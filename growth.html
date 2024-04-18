@@ -17,7 +17,7 @@
   <script src="https://js.arcgis.com/4.28/"></script>
 
 
- 
+ <!-- calls the required elements from esri-->
   <script>  
     require([
       "esri/config", 
@@ -41,11 +41,15 @@
     ], function(esriConfig, Map, MapView, Locate, BasemapGallery, PortalBasemapsSource, Search, Graphic, 
     GraphicsLayer, FeatureLayer, Editor, Legend, TileLayer, VectorTileLayer, LayerList, SimpleRenderer, Expand) {   
 
+      //establishes user API key
       esriConfig.apiKey = "AAPKc722771c0ccc42f6b3a50f98f0541437noDYBlU0Z8XIJioQe0FCEDxsHh9fAgIj7WZTgQnwd8Iro4vn-CgJSPt4wG7YeNvj"
+
+      //builds the map element and defines the basemap
       const map = new Map({ 
         basemap: "arcgis-streets"
       });
       
+      //builds container for map and sets up the center point/zoom at load
       const view = new MapView({
           map: map,
           center: [-88.837, 42.92], // longitude, latitude
@@ -53,36 +57,34 @@
           container: "mapleft"
       });
       
-      let layerList = new LayerList({
-      view: view
-      });
-      const layerListExpand = new Expand({
-        expandIcon: "layers",
-        view: view,
-        content: layerList
-      });
-      view.ui.add(layerListExpand, "bottom-right")
+     // let layerList = new LayerList({
+     // view: view
+     // });
+     // const layerListExpand = new Expand({
+     //   expandIcon: "layers",
+     //   view: view,
+     //   content: layerList
+     // });
+     // view.ui.add(layerListExpand, "bottom-right")
 
 
 
+     //calls the layer with town extents
       let FortGrowth = new VectorTileLayer({
         url: "https://vectortileservices.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/Fort_Extents_Combined/VectorTileServer",
         listMode: "hide-children"
       });
+      //adds layer to map and defines how it appears
       map.add(FortGrowth);
       FortGrowth.title = "Fort Atkinson's Growth Through Time";
 
 
-
-     // const graphicsLayer = new GraphicsLayer();  
-      //map.add(graphicsLayer);
-
-
-
+      //sets up a locate button
       const locateBtn = new Locate({view: view});
       view.ui.add(locateBtn, {position: "top-left"});
 
 
+      //builds basemap gallery and defines which maps are in the gallery
       const basemapGallery = new BasemapGallery({
         view: view,
         source: {
@@ -104,6 +106,7 @@
           }}
         });
 
+        //creates an expand element for the basemap gallery
       const basemapExpand = new Expand({
         expandIcon: "basemap",
         view: view,
@@ -128,6 +131,7 @@
 
 </head>
 <body>
+  <!--calls the navigation bar and contents-->
   <div class="navbar">
   <a href = "index.html" class = "button" >Main Map</a>
   <a href = "growth.html" class = "button">Fort Atkinson Over Time</a>
@@ -139,8 +143,10 @@
   <div id="mapleft"></div> 
 
 
+  <!--calls the "textright" div defined in the css document-->
   <div id="textright">
 
+  <!--This section is the body of the page-->
   <h2>Growth of the City</h2>
 
   <p>According to the census, the population has grown from 334 in 1850 to 12,579 in 2022.
@@ -156,7 +162,7 @@
     1984 - 2.535 Square Miles<br>
     2023 - 4.368 Square Miles<br>
 
-    <h3>The census population of Fort Atkinson through the years</h3>
+    <h3>The census population of Fort Atkinson through the years:</h3>
     <img src="content/FortPopChart1.png" alt="FortPopulation" width="400">
     
     <p></p>
@@ -167,7 +173,7 @@
     <p></p>
 
 
-  <!--<h2>This shows the growth of the town of Fort Atkinson through time.</h2> -->
+
   
 
 </div>

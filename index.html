@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--defines the title and sets up the page-->
   <title>Historical Fort Atkinson</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -10,14 +11,14 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="content" href="content"
   
-  <!-- calls google fonts-->
+ <!--calls google fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <script src="https://js.arcgis.com/4.28/"></script>
 
 
- 
+ <!-- calls the required elements from esri-->
   <script>  
     require([
       "esri/config", 
@@ -289,6 +290,7 @@
   <!-- displays map -->
   <div id="viewDiv">
     <div id="infoDiv">
+      <!--This is the text that appears in the comment/advice popup within the map-->
       <h2>About This Map</h2>
       <p>Above this icon is the list of available image layers you can turn on and off, and above that you can select what kind of map you want in the background. 
         The map layers and aerial photos show Fort Atkinson as it was during previous periods in history, and the two points of interest layers 
